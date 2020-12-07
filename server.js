@@ -23,7 +23,7 @@ const handle = app.getRequestHandler();
 
 // db
 // local db
-const uri = "mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.net/DENTAL-CARE?retryWrites=true&w=majority";
+
 // mongoose
    .connect(process.env.DATABASE_LOCAL, {
      useNewUrlParser: true,
@@ -37,7 +37,7 @@ const uri = "mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.n
 
 //atlas db
  mongoose
-   .connect(process.env.MONGODB_URI, {
+   .connect(process.env.DATABASE_CLOUD, {
      useNewUrlParser: true,
      useCreateIndex: true,
      useFindAndModify: true,
@@ -51,7 +51,7 @@ const uri = "mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.n
 //my db
  mongoose
    .connect(
-     process.env."mongodb+srv://sharoz:123@cluster0.nd5oo.mongodb.net/seoblog?retryWrites=true&w=majority",
+     process.env."mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.net/seoblogE?retryWrites=true&w=majority",
      {
        useNewUrlParser: true,
        useCreateIndex: true,
@@ -66,7 +66,7 @@ const uri = "mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.n
 app.prepare().then(() => {
   mongoose
 
-    .connect(process.env.MONGODB_URI, {
+    .connect(process.env.DATABASE_CLOUD, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useFindAndModify: true,
