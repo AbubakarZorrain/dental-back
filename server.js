@@ -23,46 +23,46 @@ const handle = app.getRequestHandler();
 
 // db
 // local db
-
+const uri = "mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.net/DENTAL-CARE?retryWrites=true&w=majority";
 // mongoose
-//   .connect(process.env.DATABASE_LOCAL, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//   })
-//   .then(() => console.log("DB connected"))
-//   .catch((err) => {
-//     console.log(err);
-//   });
+   .connect(process.env.DATABASE_LOCAL, {
+     useNewUrlParser: true,
+     useCreateIndex: true,
+     useFindAndModify: false,
+   })
+   .then(() => console.log("DB connected"))
+   .catch((err) => {
+     console.log(err);
+   });
 
 //atlas db
-// mongoose
-//   .connect(process.env.DATABASE_CLOUD, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("DB connected"))
-//   .catch((err) => {
-//     console.log(err);
-//   });
+ mongoose
+   .connect(process.env.MONGODB_URI, {
+     useNewUrlParser: true,
+     useCreateIndex: true,
+     useFindAndModify: true,
+     useUnifiedTopology: true,
+   })
+   .then(() => console.log("DB connected"))
+   .catch((err) => {
+     console.log(err);
+   });
 
 //my db
-// mongoose
-//   .connect(
-//     "mongodb+srv://sharoz:123@cluster0.nd5oo.mongodb.net/seoblog?retryWrites=true&w=majority",
-//     {
-//       useNewUrlParser: true,
-//       useCreateIndex: true,
-//       useFindAndModify: true,
-//       useUnifiedTopology: true,
-//     }
-//   )
-//   .then(() => console.log("DB connected"))
-//   .catch((err) => {
-//     console.log(err);
-//   });
+ mongoose
+   .connect(
+     "mongodb+srv://sharoz:123@cluster0.nd5oo.mongodb.net/seoblog?retryWrites=true&w=majority",
+     {
+       useNewUrlParser: true,
+       useCreateIndex: true,
+       useFindAndModify: true,
+       useUnifiedTopology: true,
+     }
+   )
+   .then(() => console.log("DB connected"))
+   .catch((err) => {
+     console.log(err);
+   });
 app.prepare().then(() => {
   mongoose
 
@@ -149,12 +149,12 @@ app.prepare().then(() => {
   require("./models/product");
   const Product = mongoose.model("Product");
   server.get("/getproduct", async function (req, res) {
-    // try {
-    //   const product = await Product.find({}).sort({ _id: -1 });
-    //   res.send(product);
-    // } catch (error) {
-    //   res.send(error);
-    // }
+  try {
+    const product = await Product.find({}).sort({ _id: -1 });
+    res.send(product);
+  } catch (error) {
+    res.send(error);
+  }
     await Product.find({})
       .then((product) => res.json(product))
       .catch((e) => console.log(e));
@@ -171,29 +171,28 @@ app.prepare().then(() => {
   });
 
   server.get("/getproduct/:_id", async function (req, res) {
-    // try {
-    //   const id = req.params._id;
-    //   const product = await Product.find({ _id: id });
-    //   res.send(product);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  try {
+    const id = req.params._id;
+    const product = await Product.find({ _id: id });
+    res.send(product);
+  } catch (error) {
+    console.log(error);
+  }
     await Product.find({ _id: id })
       .then((product) => res.json(product))
       .catch((e) => console.log(e));
   });
 
   server.get(`/getproductcategory/:cate`, async function (req, res) {
-    // try {
-    //   const cate = req.params.cate;
-
-    //   const product = await Product.find({
-    //     $or: [{ category: cate }, { model: cate }, { brand: cate }],
-    //   });
-    //   res.send(product);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  try {
+    const cate = req.params.cate;
+   const product = await Product.find({
+     $or: [{ category: cate }, { model: cate }, { brand: cate }],
+   });
+   res.send(product);
+ } catch (error) {
+   console.log(error);
+ }
     let cate = req.params.cate;
 
     await Product.find({
@@ -248,12 +247,12 @@ app.prepare().then(() => {
   const Blog = mongoose.model("Blog");
 
   server.get(`/getblog`, async function (req, res) {
-    // try {
-    //   const blog = await Blog.find({}).sort({ _id: -1 }).then(()=>res.send())
-    //   res.send(blog);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+ try {
+   const blog = await Blog.find({}).sort({ _id: -1 }).then(()=>res.send())
+   res.send(blog);
+ } catch (error) {
+   console.log(error);
+ }
     await Blog.find({})
       .then((blog) => res.send(blog))
       .catch((e) => console.log(e));
@@ -269,15 +268,15 @@ app.prepare().then(() => {
   });
 
   server.get(`/getblog/search/:title`, async function (req, res) {
-    // try {
-    //   const title = req.params.title;
-    //   const blog = await Blog.find({
-    //     title: { $regex: new RegExp("^" + title.toLowerCase(), "i") },
-    //   });
-    //   res.send(blog);
-    // } catch (error) {
-    //   console.log();
-    // }
+ try {
+   const title = req.params.title;
+   const blog = await Blog.find({
+     title: { $regex: new RegExp("^" + title.toLowerCase(), "i") },
+   });
+   res.send(blog);
+ } catch (error) {
+   console.log();
+ }
     let title = req.params.title;
     await Blog.find({
       title: { $regex: new RegExp("^" + title.toLowerCase(), "i") },
@@ -286,13 +285,13 @@ app.prepare().then(() => {
       .catch((e) => console.log(e));
   });
   server.get(`/getblog/:_id`, async function (req, res) {
-    // try {
-    //   const _id = await req.params._id;
-    //   const blog = await Blog.find({ _id: _id });
-    //   await res.send(blog);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+ try {
+   const _id = await req.params._id;
+   const blog = await Blog.find({ _id: _id });
+   await res.send(blog);
+ } catch (error) {
+   console.log(error);
+ }
     let id = await req.params._id;
     await Blog.find({ _id: id })
       .then((blog) => res.send(blog))
