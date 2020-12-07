@@ -51,7 +51,7 @@ const handle = app.getRequestHandler();
 //my db
  mongoose
    .connect(
-     process.env."mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.net/seoblogE?retryWrites=true&w=majority",
+     process.env."mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.net/dental-care?retryWrites=true&w=majority",
      {
        useNewUrlParser: true,
        useCreateIndex: true,
