@@ -51,7 +51,7 @@ const uri = "mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.n
 //my db
  mongoose
    .connect(
-     "mongodb+srv://sharoz:123@cluster0.nd5oo.mongodb.net/seoblog?retryWrites=true&w=majority",
+     process.env."mongodb+srv://sharoz:123@cluster0.nd5oo.mongodb.net/seoblog?retryWrites=true&w=majority",
      {
        useNewUrlParser: true,
        useCreateIndex: true,
@@ -66,7 +66,7 @@ const uri = "mongodb+srv://zorain:mnbv098765@dental-care-cluster.qqg6t.mongodb.n
 app.prepare().then(() => {
   mongoose
 
-    .connect(process.env.DATABASE_CLOUD, {
+    .connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useCreateIndex: true,
       useFindAndModify: true,
